@@ -22,7 +22,7 @@ jobs:
           - MYSQL_USER: student
           - MYSQL_PASSWORD: mysql
           
-    working_directory: ~/INFO3030/lauracavanaugh-app
+    working_directory: ~/lauracavanaugh-app
       
     
     environment:
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - checkout:
-          path: ~/INFO3030
+          path: ~/lauracavanaugh-app
       - run: sudo apt-get update
       - run: sudo apt install mysql-client
       - run:
@@ -44,15 +44,7 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
 
-      - run:
-          name: Import dummy data; run an example query running db setup from a file
-          command: |
-            mysql -h 127.0.0.1 -u student -pmysql stocks < src/main/sql/stocks_db_initialization.sql
-            
-      - run:
-          name: run an example query
-          command: |
-            mysql -h 127.0.0.1 -u student -pmysql --execute="SELECT * FROM stocks.person"
+
 
 
       # Download and cache dependencies
